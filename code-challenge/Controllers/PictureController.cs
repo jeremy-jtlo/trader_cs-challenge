@@ -1,21 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
-using Microsoft.Extensions.WebEncoders;
 
-namespace MvcMovie.Controllers 
+// For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+
+namespace code_challenge.Controllers
 {
     public class PictureController : Controller
     {
-        //
-        // GET: /Picture/
-        public string Index() 
+        // GET: /<controller>/
+        public IActionResult Index()
         {
-            return "This is my default action. Hurr durr";
-        }
-        
-        //
-        // GET: /Picture/Welcome/
-        public string Welcome() {
-            return "Here's the welcome action method.";
+            return View();
         }
     }
 }
