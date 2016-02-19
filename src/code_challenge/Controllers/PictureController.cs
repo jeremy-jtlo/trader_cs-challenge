@@ -29,8 +29,22 @@ namespace code_challenge.Controllers
             {
                 return returnImage;
             }
-                
         }
+
+        private Image ScaleImage(double scaleRatio)
+        {
+            var imageFile = OpenImage();
+
+            double newWidth = imageFile.Width * scaleRatio;
+            double newHeight = imageFile.Height * scaleRatio;
+
+            var returnImage = (Image) imageFile.Clone();
+
+            imageFile.Dispose();
+
+            return returnImage;
+        }
+
         // GET: /Picture/
         public IActionResult Index()
         {
@@ -52,9 +66,62 @@ namespace code_challenge.Controllers
         }
         */
 
+        public FileResult DownloadFile()
+        {
+            byte[] fileBytes = System.IO.File.ReadAllBytes(ImagePath());
+            string fileName = "bmw.jpg";
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet,fileName);
+        }
+
+        public IActionResult ShrinkImage()
+        {
+            var shrunkenImage = ScaleImage(0.8);
+
+            if (System.IO.File.Exists(ImagePath()))
+            {
+                System.IO.File.Delete(ImagePath());
+            }
+
+            shrunkenImage.Save(ImagePath());
+
+            return Redirect("/Picture");
+        }
+
+        public IActionResult GrowImage()
+        {
+            var grownImage = ScaleImage(1.2);
+
+            if (System.IO.File.Exists(ImagePath()))
+            {
+                System.IO.File.Delete(ImagePath());
+            }
+
+            grownImage.Save(ImagePath());
+
+            return Redirect("/Picture");
+        }
+
+        public IActionResult RotateLeft()
+        {
+            var imageFile = OpenImage();
+
+            imageFile.RotateFlip(RotateFlipType.Rotate270FlipNone);
+
+            if (System.IO.File.Exists(ImagePath()))
+            {
+                System.IO.File.Delete(ImagePath());
+            }
+            imageFile.Save(ImagePath());
+
+            imageFile.Dispose();
+            return Redirect("/Picture");
+        }
+
         public IActionResult RotateRight()
         {
             var imageFile = OpenImage();
+
+            imageFile.RotateFlip(RotateFlipType.Rotate90FlipNone);
 
             if (System.IO.File.Exists(ImagePath()))
             {

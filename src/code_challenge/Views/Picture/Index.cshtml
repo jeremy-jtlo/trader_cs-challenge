@@ -2,12 +2,15 @@
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Vehicle Details: BMW M3";
 }
 
 <h2>Vehicle Details Page</h2>
 <p>@ViewData["debugString"]</p>
 
-<a href="@Url.Action("RotateRight", "Picture")">Dummy Function</a>
-<!-- <img src="~/images/bmw.jpg" alt="A BMW E30" /> -->
+<a href="@Url.Action("RotateRight", "Picture")">Rotate Image Right</a><br />
+<a href="@Url.Action("RotateLeft", "Picture")">Rotate Image Left</a><br />
+<a href="@Url.Action("ShrinkImage", "Picture")">Shrink Image Dimensions</a><br />
+<a href="@Url.Action("GrowImage", "Picture")">Grow Image Dimensions</a><br />
+<a href="@Url.Action("DownloadFile", "Picture")">Download Image</a><br />
 <img src="~/images/bmw.jpg" alt="A BMW E34" />
